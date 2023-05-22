@@ -1,13 +1,14 @@
 // Tic tac toe
-// Function that creates the game board
-// function that listens for mouse click to display X or O
+// Function that creates the game board = done
+// function that listens for mouse click to display X or O = done
 // buttons connected to a function that select difficulty
 // difficulty selections: random and impossible - implement the logic
-// function that checks for game win, loss, or draw
-// function that displays an alert you win, lose, draw, then a restart button
+// function that checks for game win, loss, or draw = done
+// function that displays an alert you win, lose, draw, then a restart button = implement restart button
 
 var currentPlayer = "X";
 var gameEnded = false;
+var difficulty = "random"; // "random" or "impossible"
 
 // Array to store the game board state"
 /*
@@ -57,6 +58,7 @@ function handleSquareClick() {
   }
 }
 
+
 // Function to check for a winner
 function checkForWinner() {
   // Check rows
@@ -99,12 +101,20 @@ function checkForDraw() {
 // Function to announce the result
 function announceResult(result) {
   if (result === "draw") {
-    alert("It's a draw!");
+    if (confirm("It's a draw! Do you want to restart the game?")) {
+      restartGame();
+    }
   } else {
-    alert("Player " + result + " wins!");
+    if (confirm("Player " + result + " wins! Do you want to restart the game?")) {
+      restartGame();
+    }
   }
 }
 
+// Function to restart the game
+function restartGame() {
+ window.location.reload();
+}
 function createGameboard() {
   var parentElement = document.getElementById('gameBoard');
 
@@ -118,7 +128,11 @@ function createGameboard() {
       var square = document.createElement('div');
       square.className = 'square';
 
-      // set the data attributes for the row and column index
+      /* Set the data attributes for the row and column index
+      When a square is clicked, the handleSquareClick function is invoked, and within that function, you can access the row and column index of the clicked square using the dataset property of the square element:
+      With these row and column indices, you can update the corresponding position in the board array with the current player's symbol.
+      The data attributes row and col serve as a way to connect the rendered game board with the underlying board array. They provide a means to identify and update the correct position in the board array when a square is clicked. */
+
       square.dataset.row = i;
       square.dataset.col = j;
 
@@ -133,3 +147,4 @@ function createGameboard() {
 
 // call the function to create the game board
 createGameboard();
+
